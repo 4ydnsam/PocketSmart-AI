@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Income | PocketSmart AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+                Pocket<span>Smart</span> AI
+            </div>
+
+            <h1>Add Income</h1>
+
+            <p class="auth-subtitle">
+                Record your income
+            </p>
+
+            <form action="/add-income" method="POST">
+
+                <label>Amount</label>
+
+                <input
+                    type="number"
+                    name="amount"
+                    placeholder="₹ Enter amount"
+                    min="1"
+                    step="0.01"
+                    required
+                >
+
+                <label>Description</label>
+
+                <input
+                    type="text"
+                    name="description"
+                    placeholder="Example: Monthly allowance"
+                >
+
+                <button type="submit">
+                    Save Income
+                </button>
+
+            </form>
+
+            <p class="auth-footer">
+                <a href="/dashboard">
+                    ← Back to Dashboard
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | PocketSmart AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Pocket<span>Smart</span> AI
+        </div>
+
+        <div class="nav-links">
+            <span>Welcome, {{ name }} 👋</span>
+            <a href="/logout" class="nav-button">Logout</a>
+        </div>
+
+    </nav>
+
+
+    <main class="dashboard">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Financial Dashboard</h1>
+                <p>Here's your financial overview.</p>
+            </div>
+
+<div>
+    <a href="/add-income" class="add-expense">
+        + Add Income
+    </a>
+
+    <a href="/add-expense" class="add-expense">
+        + Add Expense
+    </a>
+</div>
+
+
+        <!-- Summary Cards -->
+
+        <div class="summary-grid">
+
+    <div class="summary-card">
+        <p>Total Balance</p>
+        <h2>₹{{ "%.2f"|format(balance) }}</h2>
+        <span>Current balance</span>
+    </div>
+
+    <div class="summary-card">
+        <p>Total Income</p>
+        <h2>₹{{ "%.2f"|format(income) }}</h2>
+        <span>Total income</span>
+    </div>
+
+    <div class="summary-card">
+        <p>Total Expenses</p>
+        <h2>₹{{ "%.2f"|format(total_expenses) }}</h2>
+        <span>Recorded expenses</span>
+    </div>
+
+    <div class="summary-card">
+        <p>Monthly Budget</p>
+        <h2>₹{{ "%.2f"|format(budget) }}</h2>
+        <span>₹{{ "%.2f"|format(budget - total_expenses) }} remaining</span>
+    </div>
+
+</div>
+
+        <!-- Main Content -->
+
+        <div class="dashboard-grid">
+
+            <!-- Spending -->
+
+            <div class="dashboard-card">
+
+                <div class="card-header">
+                    <h2>Spending Overview</h2>
+                    <span>This Month</span>
+                </div>
+
+                <div class="chart-placeholder">
+                    📊
+                    <p>Spending chart will appear here</p>
+                </div>
+
+            </div>
+
+
+            <!-- AI Recommendation -->
+
+            <div class="dashboard-card ai-card">
+
+                <div class="card-header">
+                    <h2>🤖 AI Recommendation</h2>
+                </div>
+
+                <div class="recommendation">
+
+                    <h3>Smart Spending Tip</h3>
+
+                    <p>
+                        Your spending is currently within your monthly
+                        budget. Keep monitoring your food and shopping
+                        expenses to maintain your savings goal.
+                    </p>
+
+                    <button>
+                        View Analysis →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recent Transactions -->
+
+        <div class="dashboard-card transactions">
+
+    <div class="card-header">
+        <h2>Recent Transactions</h2>
+        <a href="/add-expense">+ Add Expense</a>
+    </div>
+
+    {% if expenses %}
+
+        {% for expense in expenses %}
+
+        <div class="transaction">
+
+            <div>
+                <strong>{{ expense["category"] }}</strong>
+
+                <p>
+                    {{ expense["description"] or "No description" }}
+                </p>
+            </div>
+
+            <strong>
+                - ₹{{ "%.2f"|format(expense["amount"]) }}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p class="empty-message">
+            No expenses recorded yet.
+        </p>
+
+    {% endif %}
+
+</div>
+        </div>
+
+    </main>
+
+</body>
+</html>
